@@ -1,3 +1,4 @@
+// Set up share
 var connect = require('connect'),
     sharejs = require('share').server;
 
