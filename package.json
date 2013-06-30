@@ -1,8 +1,11 @@
 {
   "name": "share-js-server",
   "subdomain": "share-js-server",
+  "domains": [
+    "js01.interviewsy.com"
+  ],
   "description": "ShareJS Server",
-  "version": "0.0.1-2",
+  "version": "0.0.1-3",
   "dependencies": {
     "flatiron": "0.1.x",
     "union": "0.1.x",
