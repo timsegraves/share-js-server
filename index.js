@@ -1,16 +1,15 @@
-var flatiron  = require('flatiron')
-  , app       = flatiron.app
-  ;
+var connect = require('connect'),
+    sharejs = require('share').server;
 
-app.use(flatiron.plugins.http, 
-{ "before" : [ require('./middleware/uuid') ]
-, "onError": function not_found(err) {
-    this.res.json(404, { "error": "not_found" });
-  }
-});
+var server = connect(
+      connect.logger(),
+      connect.static(__dirname + '/my_html_files')
+    );
 
-app.router.get('/', function () {
-  this.res.json({"hello": "world"});
-});
+var options = {db: {type: 'none'}}; // See docs for options. {type: 'redis'} to enable persistance.
 
-app.start(3000, function () { console.log({"flatiron": "ok"}); });
+// Attach the sharejs REST and Socket.io interfaces to the server
+sharejs.attach(server, options);
+
+server.listen(8000);
+console.log('Server running at http://127.0.0.1:8000/');
